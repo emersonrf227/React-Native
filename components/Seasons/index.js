@@ -11,15 +11,15 @@ class Seasons extends PureComponent {
     renderSeasons() {
         let items = [];
 
-        for (let i = 0; i <= 20; i++) {
+        for (let i = 0; i <= 19; i++) {
             const year = '20' + (i > 9 ? i: `0${i}`);
             items.push(
-                <Button  
+                <Button   style={style.buttons}
                 onPress={() =>this.props.nomeFuncao(year)}
                 
                 key={`season${i}`}>
                 <Text>
-                    {i > 9 ? i : `0${i}`}
+                    {i > 9 ? `20${i}` : `200${i}`}
 
                 </Text>
                 </Button>

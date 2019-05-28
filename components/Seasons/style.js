@@ -7,7 +7,14 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
-    
+
+    buttons:{
+        borderRadius: 100,
+        backgroundColor: '#669',
+
+
+    },
+   
    
 
 
