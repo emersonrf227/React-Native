@@ -31,6 +31,7 @@ class Seasons extends PureComponent {
     render() {
         return (
             <View style={style.container}>
+               
                 {this.renderSeasons()}
             </View>
         );

@@ -5,12 +5,15 @@ export default StyleSheet.create({
 
         flex: 1, 
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        marginTop: 50
     },
 
     buttons:{
-        borderRadius: 100,
+        borderRadius: 10,
         backgroundColor: '#669',
+        padding: 10, 
+        margin: 5
 
 
     },

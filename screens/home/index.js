@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Seasons from '../../components/Seasons';
+import Header from '../../components/Header';
 import {SafeAreaView} from 'react-navigation';
 
 export default class Home extends React.Component{ 
@@ -13,7 +14,7 @@ constructor(props){
 
 static navigationOptions = () => {
   return{
-    title: 'Home',
+    headerTitle: <Header />,
   };
 }
   
@@ -29,7 +30,7 @@ static navigationOptions = () => {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView>
         <Seasons
           nomeFuncao={this.getData}
         ></Seasons>

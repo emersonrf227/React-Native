@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import Seasons from '../../components/Seasons';
 import { SafeAreaView } from 'react-navigation';
-import { Container, Header, Content, Card, CardItem, Body} from 'native-base';
+import { Container, Header, Content, List, ListItem, Left, Right, Icon } from 'native-base';
+
 
 
 
@@ -50,7 +51,7 @@ export default class App extends React.Component {
 
                 this.setState({
                     results: data.MRData.RaceTable.Races
-                    
+
                 });
 
             }).catch((err) => {
@@ -62,42 +63,56 @@ export default class App extends React.Component {
 
 
     renderResult(item) {
-        
-        console.log(item.raceName);
-       
-            let corridas =[
-                
-            
-            
-            <Text key={'season'}>{item.raceName} {item.date} </Text>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        ]
-              return  corridas;
 
-       
-            
+        console.log(item.raceName);
+
+        let corridas = [
+
+
+            <ListItem>
+                <Left>
+                    <Text key={'season'}>{item.raceName} </Text>
+                </Left>
+                <Right>
+                    <Icon name="arrow-forward" />
+                </Right>
+            </ListItem>
+
+
+
+
+
+
+
+
+
+
+
+        ]
+        return corridas;
+
+
+
     }
 
     // (RENDER) METODO QUE CARREGA TODO O PROJETO 
     render() {
-     
+
 
 
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView>
 
-                {this.state.results.map(this.renderResult)}
+               
+                    <List>
 
-            </SafeAreaView>
+                        {this.state.results.map(this.renderResult)}
+
+                    </List>
+
+                    
+
+            </SafeAreaView >
         );
     }
 }
@@ -109,4 +124,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    contentContainer: {
+        paddingVertical: 20
+    }
 });
