@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Seasons from '../../components/Seasons';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, ScrollView } from 'react-navigation';
 import { Container, Header, Content, List, ListItem, Left, Right, Icon } from 'native-base';
 
 
 
 
 export default class App extends React.Component {
+
+
 
 
     // (STATE) METODO QUE ARMAZENA OS DADOS DA API  
@@ -17,6 +19,8 @@ export default class App extends React.Component {
 
 
     };
+
+
 
 
 
@@ -32,9 +36,14 @@ export default class App extends React.Component {
     componentDidMount() {
         const season = this.props.navigation.getParam('season');
 
+        //console.log(season);
+        let anoTemp = season;
+
 
         //ESSA PARTE ESTA ACIONANDO A API PASSANDO O PARAMENTO SEASON
         this.getData(season);
+
+
 
 
 
@@ -67,8 +76,6 @@ export default class App extends React.Component {
         console.log(item.raceName);
 
         let corridas = [
-
-
             <ListItem>
                 <Left>
                     <Text key={'season'}>{item.raceName} </Text>
@@ -77,41 +84,28 @@ export default class App extends React.Component {
                     <Icon name="arrow-forward" />
                 </Right>
             </ListItem>
-
-
-
-
-
-
-
-
-
-
-
         ]
+        
         return corridas;
+        
+    }
 
+    renderAno() {
 
+        console.log('Ano da temporada');
 
     }
 
     // (RENDER) METODO QUE CARREGA TODO O PROJETO 
     render() {
-
-
-
         return (
             <SafeAreaView>
-
-               
+                <Text style={styles.textAge} >Circuitos do ano de: {this.props.navigation.getParam('season')} </Text>
+                <ScrollView>
                     <List>
-
                         {this.state.results.map(this.renderResult)}
-
                     </List>
-
-                    
-
+                </ScrollView>
             </SafeAreaView >
         );
     }
@@ -125,6 +119,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     contentContainer: {
-        paddingVertical: 20
+        paddingVertical: 30
+    }, 
+    textAge: {
+        margin: 20,
+        fontSize: 19,
+        
+        
     }
+
 });
