@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Seasons from '../../components/Seasons';
 import { SafeAreaView, ScrollView } from 'react-navigation';
-import { Container, Header, Content, List, ListItem, Left, Right, Icon } from 'native-base';
+import { Container, Header, Content, List, ListItem, Left, Right, Icon, Button } from 'native-base';
+import Moment from 'moment';
 
 
 
@@ -12,10 +13,12 @@ export default class App extends React.Component {
 
 
 
+
     // (STATE) METODO QUE ARMAZENA OS DADOS DA API  
     state = {
 
         results: [],
+        anoTemp: this.props.navigation.getParam('season')
 
 
     };
@@ -36,8 +39,8 @@ export default class App extends React.Component {
     componentDidMount() {
         const season = this.props.navigation.getParam('season');
 
-        //console.log(season);
-        let anoTemp = season;
+        let yers = this.props.navigation.getParam('season');
+
 
 
         //ESSA PARTE ESTA ACIONANDO A API PASSANDO O PARAMENTO SEASON
@@ -72,35 +75,44 @@ export default class App extends React.Component {
 
 
     renderResult(item) {
-
-        console.log(item.raceName);
-
+        Moment.locale('pt');
+        let dateCor = item.date;
+        let nameGp = item.raceName.replace("Grand Prix", "");
         let corridas = [
             <ListItem>
                 <Left>
-                    <Text key={'season'}>{item.raceName} </Text>
+                    <Text>GP {nameGp}</Text>
                 </Left>
                 <Right>
-                    <Icon name="arrow-forward" />
+                    <Text> {Moment(dateCor).format('DD/MM')} </Text>
                 </Right>
             </ListItem>
         ]
-        
+
         return corridas;
-        
-    }
-
-    renderAno() {
-
-        console.log('Ano da temporada');
 
     }
+
 
     // (RENDER) METODO QUE CARREGA TODO O PROJETO 
     render() {
         return (
+
+
             <SafeAreaView>
-                <Text style={styles.textAge} >Circuitos do ano de: {this.props.navigation.getParam('season')} </Text>
+                <Text style={styles.textAge} >Circuitos do ano de: {this.state.anoTemp} </Text>
+
+                <Button   
+                onPress={() => this.props.navigation.navigate('Pilotos',{ 
+                    season: this.state.anoTemp,
+                    })}> 
+                
+                <Text>
+                 Acessar Pilotos
+
+                </Text>
+                </Button>
+
                 <ScrollView>
                     <List>
                         {this.state.results.map(this.renderResult)}
@@ -120,12 +132,12 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingVertical: 30
-    }, 
+    },
     textAge: {
         margin: 20,
         fontSize: 19,
-        
-        
+
+
     }
 
 });
