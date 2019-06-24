@@ -13,7 +13,7 @@ export default class Temporadas extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
     }
 
 
@@ -48,7 +48,7 @@ export default class Temporadas extends React.Component {
         //ESSA PARTE ESTA ACIONANDO A API PASSANDO O PARAMENTO SEASON
         this.getData(season);
         this.getData(navigate);
-        const  navigate  = this.props.navigation;
+        const navigate = props.navigation;
 
     }
 
@@ -102,18 +102,26 @@ export default class Temporadas extends React.Component {
                 </Left>
                 <Right>
 
+                    {/* PROFESSOR POR ALGUM MOTIVO NÃO CONSIGO FAZER ESSE CARA FUNCIONAR JA TENTEI DE VARIAS FORMAS E NÃO ACHO O ERRO.
+                    SE CONSEGUIR ME INSTRUIR ONDE ERRE NA CORREÇÃO AGRADEÇO */}
 
+                    {/* <Button transparent info
+                        onPress={() => this.props.navigation('Detalhes')}  >
+                        <Text style={styles.textLink} >Detalhes</Text>
+                    </Button> */}
+
+                    <Button transparent info
+                        onPress={() => this.console.log('Detalhes')}  >
+                        <Text style={styles.textLink} >Detalhes</Text>
+                    </Button>
 
 
 
                 </Right>
-                <Button transparent info
-            onPress={() => this.navigate('Detalhes')}  >
-             <Text style={styles.textLink} >Detalhes</Text>
-         </Button>
+
             </ListItem>
-            
-      
+
+
         ]
 
         return corridas;
@@ -125,19 +133,19 @@ export default class Temporadas extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-           
+
 
             <SafeAreaView>
                 <Text style={styles.textAge} >Circuitos do ano de: {this.state.anoTemp} </Text>
 
-             
-         
-      
-   
+
+
+
+
 
 
                 <Button style={styles.textLink} bordered
-                   onPress={() => navigate('Pilotos', {
+                    onPress={() => navigate('Pilotos', {
                         season: this.state.anoTemp,
                     })}>
 
