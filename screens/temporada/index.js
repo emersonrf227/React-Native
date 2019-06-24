@@ -48,7 +48,7 @@ export default class Temporadas extends React.Component {
         //ESSA PARTE ESTA ACIONANDO A API PASSANDO O PARAMENTO SEASON
         this.getData(season);
         this.getData(navigate);
-        const navigate = props.navigation;
+        const navigate = this.props.navigation;
 
     }
 
