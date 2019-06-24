@@ -12,6 +12,8 @@ import Temporada from './screens/temporada';
 
 import Pilotos from './screens/pilotos';
 
+import Detalhes from './screens/detalhes';
+
 
 const AppNavigator = createStackNavigator({
 
@@ -23,6 +25,9 @@ const AppNavigator = createStackNavigator({
   },
 Pilotos: {
     screen: Pilotos,
+  },
+  Detalhes: {
+    screen: Detalhes,
   },
 
 },

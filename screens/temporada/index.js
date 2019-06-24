@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import Seasons from '../../components/Seasons';
 import { SafeAreaView, ScrollView } from 'react-navigation';
 import { Container, Header, Content, List, ListItem, Left, Right, Icon, Button } from 'native-base';
 import Moment from 'moment';
+import { StackNavigator } from 'react-navigation';
 
 
 
 
-export default class App extends React.Component {
+
+export default class Temporadas extends React.Component {
+
+    constructor(props) {
+        super(props);
+        
+    }
+
 
 
 
@@ -38,24 +45,18 @@ export default class App extends React.Component {
     // CONTRUTOR DO METODO 
     componentDidMount() {
         const season = this.props.navigation.getParam('season');
-
-        let yers = this.props.navigation.getParam('season');
-
-
-
         //ESSA PARTE ESTA ACIONANDO A API PASSANDO O PARAMENTO SEASON
         this.getData(season);
-
-
-
-
+        this.getData(navigate);
+        const  navigate  = this.props.navigation;
 
     }
 
     // (GETDATA) METODO QUE CHAMA A API
 
     getData(season) {
-        fetch('http://ergast.com/api/f1/' + season + '.json')
+        fetch('http://ergast.com/api/f1/' + season + '/results/1.json')
+
             .then((response) => response.json())
 
             .then((data) => {
@@ -74,19 +75,45 @@ export default class App extends React.Component {
 
 
 
-    renderResult(item) {
+    renderResult(item, method) {
+
         Moment.locale('pt');
         let dateCor = item.date;
         let nameGp = item.raceName.replace("Grand Prix", "");
         let corridas = [
             <ListItem>
                 <Left>
-                    <Text>GP {nameGp}</Text>
+                    <Text>GP {nameGp} {'\n'}
+
+                        <Text style={styles.textDesc}> {'\n'}
+
+                            {item.Circuit.Location.locality} - {item.Circuit.Location.country}
+                            {'\n'}
+                            {Moment(dateCor).format('DD/MM/YYYY')}
+
+                        </Text>
+
+
+
+                    </Text>
+
+
+
                 </Left>
                 <Right>
-                    <Text> {Moment(dateCor).format('DD/MM')} </Text>
+
+
+
+
+
                 </Right>
+                <Button transparent info
+            onPress={() => this.navigate('Detalhes')}  >
+             <Text style={styles.textLink} >Detalhes</Text>
+         </Button>
             </ListItem>
+            
+      
         ]
 
         return corridas;
@@ -96,21 +123,30 @@ export default class App extends React.Component {
 
     // (RENDER) METODO QUE CARREGA TODO O PROJETO 
     render() {
+        const { navigate } = this.props.navigation;
         return (
-
+           
 
             <SafeAreaView>
                 <Text style={styles.textAge} >Circuitos do ano de: {this.state.anoTemp} </Text>
 
-                <Button   
-                onPress={() => this.props.navigation.navigate('Pilotos',{ 
-                    season: this.state.anoTemp,
-                    })}> 
-                
-                <Text>
-                 Acessar Pilotos
+             
+         
+      
+   
+
+
+                <Button style={styles.textLink} bordered
+                   onPress={() => navigate('Pilotos', {
+                        season: this.state.anoTemp,
+                    })}>
+
+                    <Text>
+                        Acessar Pilotos
 
                 </Text>
+
+
                 </Button>
 
                 <ScrollView>
@@ -137,6 +173,15 @@ const styles = StyleSheet.create({
         margin: 20,
         fontSize: 19,
 
+    },
+
+    textLink: {
+        color: '#4040ff',
+
+    },
+
+    textDesc: {
+        color: '#909090',
 
     }
 
